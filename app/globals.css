@@ -1,0 +1,24 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-slide {
+  width: fit-content !important;
+
+  padding: 6px;
+}
+
+.swiper-slide-active {
+  color: #fff;
+  /* background: linear-gradient(45deg, rgb(246, 146, 89), rgb(241, 105, 117)); */
+  transform: scale(1.2);
+
+  /* width: 90px !important; */
+  z-index: 2;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
