@@ -11,6 +11,8 @@ import {
   Home2,
   Home3,
   InfoCircle,
+  User,
+  UserSquare,
 } from "iconsax-react";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -26,6 +28,7 @@ import {
   animateScroll as scroll,
   scrollSpy,
 } from "react-scroll";
+import BaseButton from "../Button/BaseButton";
 
 function LandingNavbar() {
   const scrollto = () => {
@@ -33,10 +36,25 @@ function LandingNavbar() {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // تمیزکاری در unmount
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
+
   return (
     <>
-      <div className=" w-full h-14 bg-[#FF6000]/70 z-40 backdrop-blur-lg rounded-3xl border border-white/40  flex justify-between items-center p-8  sticky top-4 max-w-[1220px] mx-auto">
-        <div className=" hidden xl:flex  justify-center gap-16">
+      <div className=" w-full h-14  z-40   flex justify-between items-center p-8  sticky lg:top-4  mx-auto">
+        <div className=" hidden xl:block">LOGO</div>
+        <div className=" hidden bg-white/30 backdrop-blur-lg rounded-3xl py-4 xl:flex  justify-center shadow-lg px-24 gap-10">
           <Link
             to="hero"
             // onClick={scrollto}
@@ -44,10 +62,10 @@ function LandingNavbar() {
             smooth={true}
             offset={-100}
             duration={500}
-            className=" flex gap-3 text-white p-2 hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+            className=" flex gap-3 text-black   hover:bg-primary/20 hover:text-black cursor-pointer px-4 py-2  duration-200 rounded-3xl  h-full items-center"
           >
             <Home2 />
-            <p className=" font-semibold">صفحه اصلی</p>
+            <p className=" font-semibold text-lg">صفحه اصلی</p>
           </Link>
 
           <Link
@@ -57,10 +75,10 @@ function LandingNavbar() {
             smooth={true}
             offset={-100}
             duration={500}
-            className=" flex gap-3 p-2 text-white hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+            className=" flex gap-3 text-black  hover:bg-primary/20 hover:text-black cursor-pointer px-4 py-2  duration-200 rounded-3xl  h-full items-center"
           >
             <Designtools />
-            <p className=" font-semibold">منوی طعم نما</p>
+            <p className=" font-semibold text-lg">منوی طعم نما</p>
           </Link>
 
           <Link
@@ -70,10 +88,10 @@ function LandingNavbar() {
             smooth={true}
             offset={-100}
             duration={500}
-            className=" flex gap-3 p-2 text-white  hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+            className=" flex gap-3 text-black  hover:bg-primary/20 hover:text-black cursor-pointer px-4 py-2  duration-200 rounded-3xl  h-full items-center"
           >
-            <Call />
-            <p className=" font-semibold">ارتباط با ما</p>
+            <User />
+            <p className=" font-semibold text-lg">ارتباط با ما</p>
           </Link>
 
           <Link
@@ -83,49 +101,51 @@ function LandingNavbar() {
             smooth={true}
             offset={-100}
             duration={500}
-            className=" flex gap-3 p-2 text-white hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg h-full items-center"
+            className=" flex gap-3 text-black  hover:bg-primary/20 hover:text-black cursor-pointer px-4 py-2  duration-200 rounded-3xl  h-full items-center"
           >
             <InfoCircle />
-            <p className=" font-semibold">درباره ما</p>
+            <p className=" font-semibold text-lg">درباره ما</p>
           </Link>
+        </div>
+
+        <div className=" hidden xl:block">
+          <BaseButton>پنل کاربری</BaseButton>
         </div>
 
         <div className=" w-full xl:hidden flex items-center justify-between">
           <HambergerMenu
             onClick={() => setIsOpen(true)}
             size={24}
-            className={`${
-              isOpen ? "hidden" : "block"
-            } duration-200 cursor-pointer text-white`}
+            className={` duration-200 cursor-pointer text-black`}
           />
-          <Add
-            onClick={() => setIsOpen(false)}
-            className={` duration-200 text-white rotate-45 ${
-              isOpen ? "block" : "hidden"
-            } `}
-            size={32}
-          />
+
+          <div className=" text-2xl">LOGO</div>
+
           <div className=" xl:hidden">
-            <Image
-              alt="logo"
-              width={90}
-              height={90}
-              unoptimized
-              className=" object-cover rounded-lg"
-              src={Logo}
-            />
+            <div className=" rounded-full border-4 w-9 h-9 flex justify-center items-center border-primary">
+              <User size={20} className=" text-black" />
+            </div>
           </div>
         </div>
 
         {isOpen ? (
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className=" w-full xl:hidden absolute top-24 right-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className=" w-full xl:hidden z-40 bg-white/30 backdrop-blur-lg py-10 absolute top-0 bottom-0 min-h-screen right-0"
           >
-            <div className="   w-full bg-[#FF6000] p-4 gap-2   rounded-lg backdrop-blur-lg   flex items-center flex-col   justify-center right-0 ">
+            <div className=" absolute   right-6 top-4">
+              <Add
+                onClick={() => setIsOpen(false)}
+                className={` duration-200 text-black rotate-45 ${
+                  isOpen ? "block" : "hidden"
+                } `}
+                size={32}
+              />
+            </div>
+            <div className=" w-full p-4 gap-2 rounded-lg  flex items-center flex-col absolute justify-start right-0 ">
               <Link
                 to="hero"
                 onClick={() => setIsOpen(false)}
@@ -133,7 +153,7 @@ function LandingNavbar() {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                className=" flex gap-3 text-white p-2 hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+                className=" flex gap-3 text-black p-2 hover:bg-primary/20  cursor-pointer duration-200 rounded-lg  h-full items-center"
               >
                 <Home2 />
                 <p className=" font-semibold">صفحه اصلی</p>
@@ -147,7 +167,7 @@ function LandingNavbar() {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                className=" flex gap-3 p-2 text-white hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+                className=" flex gap-3 p-2 text-black hover:bg-primary/20  cursor-pointer duration-200 rounded-lg  h-full items-center"
               >
                 <Designtools />
                 <p className=" font-semibold">منوی طعم نما</p>
@@ -160,7 +180,7 @@ function LandingNavbar() {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                className=" flex gap-3 p-2 text-white  hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg  h-full items-center"
+                className=" flex gap-3 p-2 text-black   hover:bg-primary/20 cursor-pointer duration-200 rounded-lg  h-full items-center"
               >
                 <Call />
                 <p className=" font-semibold">ارتباط با ما</p>
@@ -173,7 +193,7 @@ function LandingNavbar() {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                className=" flex gap-3 p-2 text-white hover:bg-[#FFE6C7]/40 hover:text-white duration-200 rounded-lg h-full items-center"
+                className=" flex gap-3 p-2 text-black hover:bg-primary/20 cursor-pointer duration-200 rounded-lg h-full items-center"
               >
                 <InfoCircle />
                 <p className=" font-semibold">درباره ما</p>

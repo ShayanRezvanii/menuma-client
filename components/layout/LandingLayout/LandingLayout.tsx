@@ -7,7 +7,11 @@ interface LandingLayoutProps {
 }
 
 function LandingLayout({ children }: LandingLayoutProps) {
-  return <div className=" bg-black px-4 lg:px-56 min-h-screen">{children}</div>;
+  return (
+    <div className="  bg-[#E9E9E9] mx-auto  max-w-[1440px] min-h-screen">
+      {children}
+    </div>
+  );
 }
 
 export default LandingLayout;

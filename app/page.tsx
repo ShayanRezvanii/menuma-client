@@ -15,8 +15,8 @@ export default function Home() {
       <LandingNavbar />
       <Hero />
       <FirstSection />
-      <SecondSection />
-      <ThirdSection />
+      {/* <SecondSection />
+      <ThirdSection /> */}
       <LandingFooter />
     </LandingLayout>
   );
